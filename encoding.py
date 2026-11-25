@@ -33,8 +33,36 @@ csv_file = os.path.join(file_path, "ks-projects-201612.csv")
 with open(csv_file, 'rb') as rawdata:
     result = charset_normalizer.detect(rawdata.read(100000))
 
+print(result, "\n")
+
+# Inspecting the first line of the file
+with open(csv_file, encoding=result["encoding"]) as f:
+    first_line = f.readline()
+
+print(first_line)
+
+new_df = pd.read_csv(
+    csv_file,
+    encoding=result["encoding"],
+)
+
+# You can also read excel files with this
+# excel_file = pd.read_excel(excel_filepath)
+
+# Get sheet names from said file
+# sheets = pd.ExcelFile(excel_file)
+# sheets_names = sheets.sheet_names
+
+# List the result from a particular sheet and skipping rows
+# excel_single = pd.read_excel(excel_file, sheet=sheet_names[0], skiprows=4)
+
+# Inspect Data types of each column
+print(new_df.dtypes)
+
 # Decoding the file directly while reading
-kickstarters_2016 = pd.read_csv(csv_file, encoding='cp1006')
+# kickstarters_2016 = pd.read_csv(csv_file, encoding='cp1006')
 
 # Saving our file(will be saved as UTF-8 by default)
-kickstarters_2016.to_csv("ks-projects-201612-utf8.csv")
+#kickstarters_2016.to_csv("ks-projects-201612-utf8.csv")
+
+
