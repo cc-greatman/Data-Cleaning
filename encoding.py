@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import kagglehub
 import os
+import json
 
 # Helpful character encoding module
 import charset_normalizer
@@ -55,6 +56,12 @@ new_df = pd.read_csv(
 
 # List the result from a particular sheet and skipping rows
 # excel_single = pd.read_excel(excel_file, sheet=sheet_names[0], skiprows=4)
+
+# You can also load json files as dataframes
+# json_df = pd.DataFrame(json.load(filepath_))
+
+# And one subtle thing you cannot see in a single record: JSON records often simply omit a field that has no value, 
+# instead of writing an explicit blank. Different cards can carry different sets of keys
 
 # Inspect Data types of each column
 print(new_df.dtypes)
